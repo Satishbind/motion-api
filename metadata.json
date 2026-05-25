@@ -1,0 +1,6 @@
+{
+  "name": "Dailymotion Video Downloader",
+  "description": "Download Dailymotion videos in high quality or 4K with automatic format selection, background status tracking, and fast speeds.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

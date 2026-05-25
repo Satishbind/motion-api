@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      // Polyfill 'global' to avoid "Cannot set property fetch of #<Window> which has only a getter"
+      // When libraries like formdata-polyfill/node-fetch run in browser and reassign global.fetch
+      (function() {
+        var g = {};
+        Object.defineProperty(window, 'global', {
+          get: function() { return g; },
+          set: function(val) {
+            // Intercept assigning window to global, keep global as a safe plain object
+            if (val !== window) {
+              g = val;
+            }
+          },
+          configurable: true,
+          enumerable: true
+        });
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Google AI Studio App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
