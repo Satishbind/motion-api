@@ -416,14 +416,20 @@ app.get("/api/health", (req, res) => {
 app.get("/api/info", async (req, res) => {
   try {
     const videoUrl = req.query.url as string;
+
     if (!videoUrl) {
       return res.status(400).json({ error: "Dailymotion url dena jaruri hai." });
     }
 
-    const videoId = extractVideoId(videoUrl);
-    if (!videoId) {
-      return res.status(400).json({ error: "Sahi Dailymotion link daliye (e.g., https://www.dailymotion.com/video/xaawkmy)" });
+    function extractVideoId(url: string) {
+      const match = url.match(/video\/([a-zA-Z0-9]+)/);
+      return match ? match[1] : null;
     }
+
+    const videoId = extractVideoId(videoUrl);
+
+    console.log("VIDEO ID:", videoId);
+
 
     // Fetch real metadata of the user's exact specific video from the official free public Dailymotion API
     let dmTitle = `Dailymotion Video - ${videoId}`;
